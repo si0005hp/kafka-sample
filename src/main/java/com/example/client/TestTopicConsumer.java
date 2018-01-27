@@ -1,5 +1,7 @@
 package com.example.client;
 
+import static com.example.client.TestTopicProducer.TOPIC;
+
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.stream.StreamSupport;
@@ -7,6 +9,7 @@ import java.util.stream.StreamSupport;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class TestTopicConsumer {
@@ -23,7 +26,7 @@ public class TestTopicConsumer {
         try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties, new StringDeserializer(),
                 new StringDeserializer());) {
 
-            consumer.subscribe(Arrays.asList("test-topic"));
+            consumer.subscribe(Arrays.asList(TOPIC));
 
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(1000L);
@@ -36,6 +39,12 @@ public class TestTopicConsumer {
                 }
             }
         }
+    }
+    
+    @SuppressWarnings("unused")
+    private void seekOffset(KafkaConsumer<String, String> consumer, TopicPartition partition, long offset) {
+        consumer.poll(1000L); // ensure consumer is subscribing
+        consumer.seek(partition, offset);
     }
 
 }

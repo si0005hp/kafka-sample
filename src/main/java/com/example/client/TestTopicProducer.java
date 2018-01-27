@@ -11,6 +11,8 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 public class TestTopicProducer {
+    
+    public static final String TOPIC = "test-topic";
 
     public static void main(String[] args) {
         new TestTopicProducer().run();
@@ -25,7 +27,7 @@ public class TestTopicProducer {
             
             IntStream.rangeClosed(11, 11).boxed().forEach(i -> {
                 try {
-                    RecordMetadata meta = producer.send(new ProducerRecord<>("test-topic", 2, "key" + i, "value" + i))
+                    RecordMetadata meta = producer.send(new ProducerRecord<>(TOPIC, 2, "key" + i, "value" + i))
                             .get();
                     System.out.println(String.format("Current offset: %s", meta.offset()));
                 } catch (InterruptedException | ExecutionException e) {
