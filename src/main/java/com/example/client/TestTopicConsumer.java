@@ -19,7 +19,7 @@ public class TestTopicConsumer {
 
     private void run() {
         Properties properties = new Properties();
-        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "trusty:9092");
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "test-topic-consumer");
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 

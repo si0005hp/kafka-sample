@@ -26,4 +26,15 @@ public class SerializerStdImpl implements ISerializer {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void write(OutputStream out, byte[] b) {
+    }
+
+    @Override
+    public byte[] read(InputStream in, int bytes) {
+        return null;
+    }
+
+ 
 }

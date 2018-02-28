@@ -14,4 +14,6 @@ import lombok.ToString;
 @ToString
 public class FooDto implements Serializable {
     private String name;
+    private int id;
+    private int id2;
 }
